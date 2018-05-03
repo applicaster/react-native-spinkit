@@ -27,7 +27,7 @@ buildscript {
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "27.0.2"
+    buildToolsVersion "27.0.3"
     defaultConfig {
         minSdkVersion 17
         targetSdkVersion 26
@@ -54,7 +54,7 @@ android {
 }
 
 dependencies {
-    compile "com.facebook.react:react-native:${_reactNativeVersion}"
-    compile 'com.github.ybq:Android-SpinKit:1.1.0'
+    provided "com.facebook.react:react-native:${_reactNativeVersion}"
+    provided 'com.github.ybq:Android-SpinKit:1.1.0'
 }
 
