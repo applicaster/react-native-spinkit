@@ -1,7 +1,11 @@
 apply plugin: 'com.android.library'
 
+def _ext = rootProject.ext;
+def _reactNativeVersion = _ext.has('reactNative') ? _ext.reactNative : '+';
+
 repositories {
     mavenCentral()
+    google()
     maven {
         url "https://jitpack.io"
     }
@@ -9,36 +13,48 @@ repositories {
 
 buildscript {
     repositories {
+        jcenter()
+        google()
         mavenCentral()
         maven {
             url "https://jitpack.io"
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.0.0'
+        classpath 'com.android.tools.build:gradle:3.1.0'
     }
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
-
+    compileSdkVersion 27
+    buildToolsVersion "27.0.2"
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 23
+        minSdkVersion 17
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-rules.pro'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-rules.pro'
         }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    productFlavors {
     }
 }
 
-
 dependencies {
-    compile 'com.facebook.react:react-native:+'
+    compile "com.facebook.react:react-native:${_reactNativeVersion}"
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
 }
+
